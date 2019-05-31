@@ -111,37 +111,6 @@
 	![img](pics/Cousine.png)
 	</section>
 
-	<!-- <section data-markdown>
-	### Train dataset recipe distribution
-	--------------------------
-	<pre class="Python"><code>
-	```
-	[
-		('italian', 7838), 
-		('mexican', 6438), 
-		('southern_us', 4320), 
-		('indian', 3003), 
-		('chinese', 2673), 
-		('french', 2646), 
-		('cajun_creole', 1546), 
-		('thai', 1539), 
-		('japanese', 1423), 
-		('greek', 1175), 
-		('spanish', 989), 
-		('korean', 830), 
-		('vietnamese', 825), 
-		('moroccan', 821), 
-		('british', 804), 
-		('filipino', 755), 
-		('irish', 667), 
-		('jamaican', 526), 
-		('russian', 489), 
-		('brazilian', 467)
-	]
-		```
-	</code></pre>
-	</section> -->
-
 	<section data-markdown>
 	### Ingredients analysis
 	--------------------------
@@ -161,18 +130,18 @@
 	### Recipe length distribution by cuisine
 	--------------------------
 	![img](pics/ReceipsLenghtDistributionPerCousine.png)
-	</section>	
-
-	<section data-markdown>
-	### 20 Most Common Ingredients
-	--------------------------
-	![img](pics/Top20Ingredients.png)
 	</section>
 
 	<section data-markdown>
 	### # of different ingredients in a  cuisine
 	--------------------------
 	![img](pics/DifferenteIngredientsByCuisine.png)
+	</section>
+
+	<section data-markdown>
+	### 20 Most Common Ingredients
+	--------------------------
+	![img](pics/Top20Ingredients.png)
 	</section>
 
 	<section data-markdown>
@@ -187,9 +156,70 @@
 	![img](pics/tf-idf.png)
 	</section>
 
+	<section data-markdown>
+	### Make the observations
+	--------------------------
+	<h6>Some of the important words appear in several cuisines, BUT still this observation holds true only if the cuisines are in the same region:</h6>
+	
+	<h6>In Asian cuisines we find that fish, sauce, soy and sesame are all with higher tf-idf values;</h6>
+
+	<h6>butter, sugar, eggs and flour are found in several European cuisines;</h6>
+	
+	<h6>Greek, Spanish and Italian cuisines all share olive oil and cheese.</h6>
 	</section>
 
+	</section>
 
+<section>
+	<section data-markdown>
+	## Prepare the data for model development
+	--------------------------
+	</section>
+
+	<section data-markdown>
+	- Case Normalization
+
+	- Remove punctuation, digits or special characters
+	
+	- Remove different units
+	</section>
+
+</section>
+
+<section>
+	<section data-markdown>
+	## Feature Engineering
+	--------------------------
+	</section>
+	<section data-markdown>
+	- Binary representation of the training set (turn text into numbers.)
+
+	- Any word appearing in more than 99% of the sample will be discarded
+
+	</section>
+</section>
+
+<section>
+	<section data-markdown>
+	## Data Modeling
+	--------------------------
+	</section>
+	
+	<section data-markdown>
+	### Ensemble baseline models
+	--------------------------
+	- Logistic Regression
+	- Linear Support Vector Classifier
+	- Random Forest
+	</section>
+
+	<section data-markdown>
+	### Validated via 10-fold cv
+	--------------------------
+	Average accuracy on train sample is 80,05%
+	</section>
+
+</section>
 
 
 
