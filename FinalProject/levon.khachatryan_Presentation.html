@@ -1,0 +1,345 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>What's cooking</title>
+		<meta name="author" content="Levon Khachatryan">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/css/theme/simple.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai-sublime.css">
+		
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+
+	<body>
+		<div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      		<div class="slides">
+
+				<!-- Slide 1 -->
+				<section data-markdown>
+				##What's cooking
+				##   
+				####Levon Khachatryan
+				#####ASDS Master Program
+				</section>
+
+
+				<!-- Slide 2 -->
+				<section data-markdown>
+				##Problem statement
+				--------------------------
+				####Guessing cousine by provided ingredients of the recipe.
+
+				####[It was a text mining competition.](https://www.kaggle.com/c/whats-cooking/overview)This competition went live for 103 days and ended on 20th December 2015.
+				</section>
+
+				<!-- Slide 3 -->
+				<section>
+					<section data-markdown>
+					###Research (For text processing)
+					--------------------------
+					####TF-IDF
+					####CountVectorizer
+					</section>
+
+					<section data-markdown>
+					###Research (For modeling)
+					--------------------------
+					####Support Vector Machine
+					####Random Forest
+					####Ensemble models
+					</section>
+
+					<section data-markdown>
+					###Research (For modeling tuning)
+					--------------------------
+					####GridSearchCV
+					####RandomizedSearchCV
+					</section>
+				</section>
+
+				<!-- Slide 4 -->
+				<section>
+					<section data-markdown>
+					## Data Description
+					--------------------------
+					Train and test data come in JSON format and are pretty clear.
+					</section>
+
+					<section data-markdown>
+					### Here is one record from train data
+					--------------------------
+					<pre class="JSON"><code>
+					```
+					{
+					 "id": 24717,
+					 "cuisine": "indian",
+					 "ingredients": [
+					     "tumeric",
+					     "vegetable stock",
+					     "tomatoes",
+					     "garam masala",
+					     "naan",
+					     "red lentils",
+					     "red chili peppers",
+					     "onions",
+					     "spinach",
+					     "sweet potatoes"
+					 ]
+					 },
+					```
+					</code></pre>
+					</section>
+
+					<section data-markdown>
+					## Data Description
+					--------------------------
+					Target variable is cousine, and items in ingredients array are features using which we should classify (it is clearly classifiation task) to what cousine this recipe belongs
+					</section>
+
+					</section>
+
+				<!-- Slide 5 -->
+				<section>
+					<section data-markdown>
+					## Data exploration
+					--------------------------
+					<h4> Available cousines: 20 </h4>
+
+					<h4> Total number of recipes in train dataset: 39774 </h4>
+
+					<h4> Total number of recipes in test  dataset: 9944 </h4>
+					</section>
+
+					<section data-markdown>
+					### Train dataset recipe distribution
+					--------------------------
+					<!-- ![img](pics/Cousine.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1jUJTFgQ8McQdghKg2LJhCLrQJPEFJoaK)
+					</section>
+
+					<section data-markdown>
+					### Ingredients analysis
+					--------------------------
+
+					<h5>Maximum Number of Ingredients in a Dish:  65</h5>
+					<h5>Minimum Number of Ingredients in a Dish:  1</h5>
+
+					</section>
+
+					<section data-markdown>
+					### Recipe length distribution
+					--------------------------
+					<!-- ![img](pics/ReceipsLenghtDistribution.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1OVHaR-bdF62sMk3G2K-Rx324uFfaHYzn)
+					</section>
+
+					<section data-markdown>
+					### Recipe length distribution by cuisine
+					--------------------------
+					<!-- ![img](pics/ReceipsLenghtDistributionPerCousine.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1wf6iGD1mW3k1ti0jqpDy9JnoQ5aLzDI_)
+					</section>
+
+					<section data-markdown>
+					### # of different ingredients in a  cuisine
+					--------------------------
+					<!-- ![img](pics/DifferenteIngredientsByCuisine.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1hULz2DpfOaqPO7soPY4XM7A5hLli5Qo1)
+					</section>
+
+					<section data-markdown>
+					### 20 Most Common Ingredients
+					--------------------------
+					<!-- ![img](pics/Top20Ingredients.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1AduDWM56JBSYXLkKB8Sa4yN7vcDAHStj)
+					</section>
+
+					<section data-markdown>
+					### Ingredients used only in one cuisine
+					--------------------------
+					<!-- ![img](pics/SpecificIngredients.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1sJXIyyCSl8j6aomPRSmAPiBFPAuDc46U)
+					</section>
+
+					<section data-markdown>
+					### Feature Importance based on Tf-Idf measure
+					--------------------------
+					<!-- ![img](pics/tf-idf.png) -->
+					![img](https://drive.google.com/uc?export=download&id=10HKVSx_Mw7eDlOzaZeNs2X5hwQrqGcNL)
+					</section>
+
+					<section data-markdown>
+					### Word cloud of Italian cuisine
+					--------------------------
+					<!-- ![img](pics/Italian_Word_Cloud.png) -->
+					![img](https://drive.google.com/uc?export=download&id=1xQJ35mP3k2fPuXwcPhDdJXFvSxz0d_El)
+					</section>
+
+					<section data-markdown>
+					### Make the observations
+					--------------------------
+					<h6>Some of the important words appear in several cuisines, BUT still this observation holds true only if the cuisines are in the same region:</h6>
+					
+					<h6>In Asian cuisines we find that fish, sauce, soy and sesame are all with higher tf-idf values;</h6>
+
+					<h6>butter, sugar, eggs and flour are found in several European cuisines;</h6>
+					
+					<h6>Greek, Spanish and Italian cuisines all share olive oil and cheese.</h6>
+					</section>
+
+					</section>
+
+				<!-- Slide 6 -->
+				<section>
+					<section data-markdown>
+					## Prepare the data for model development
+					--------------------------
+					</section>
+
+					<section data-markdown>
+					- Case Normalization
+
+					- Remove punctuation, digits or special characters
+					
+					- Remove different units
+					</section>
+
+				</section>
+
+				<!-- Slide 7 -->
+				<section>
+					<section data-markdown>
+					## Feature Engineering
+					--------------------------
+					</section>
+					<section data-markdown>
+					- Binary representation of the training set (turn text into numbers.)
+
+					- Any word appearing in more than 99% of the sample will be discarded
+
+					</section>
+
+					<section data-markdown>
+					## Fit train, transform test
+					--------------------------
+					<pre class="python"><code>
+					```
+					vectorizer = CountVectorizer(analyzer = "word",
+				                             ngram_range = (1,1),
+				                             max_df = 0.99)
+
+					train_X = vectorizer.fit_transform([str(i) for i in features_processed])
+					test_X =  vectorizer.transform([str(i) for i in features_test_processed])                 
+					```
+					</code></pre>
+					</section>
+				</section>
+
+				<!-- Slide 8 -->
+				<section>
+					<section data-markdown>
+					## Data Modeling
+					--------------------------
+					</section>
+					
+					<section data-markdown>
+					### Baseline models
+					--------------------------
+					- Logistic Regression
+					- Linear Support Vector Classifier
+					- Random Forest
+					</section>
+
+					<section data-markdown>
+					## Ensemble baseline models 
+					#### (Here hyperparameters are not mentioned)
+					--------------------------
+					<pre class="python"><code>
+					```
+					vclf=VotingClassifier(estimators=[('clf1',LogisticRegression()),
+					                                  ('clf2',SVC()),
+					                                  ('clf3',RandomForestClassifier())], 
+					                                    voting='soft', weights = [1,1,1]) 
+					vclf.fit(train_X, train_Y)
+					```
+					</code></pre>
+					</section>
+
+					<section data-markdown>
+					### Hyperparameter tuning
+					--------------------------
+					####GridSearchCV for baseline models
+					####RandomizedSearchCV for main (VotingClassifier) model
+					</section>
+
+					<section data-markdown>
+					### Result
+					--------------------------
+					####Average accuracy on train sample is 80,05% (via 10-fold cv)
+					####Submission score: 79.907% (223/1338 , top 17 %)  (https://www.kaggle.com/c/whats-cooking/submissions)
+					</section>
+
+				</section>
+
+
+
+				<!-- Slide 9 -->
+				<section>
+					<blockquote>Thank You</blockquote>
+				</section>
+	      </div>
+    </div>
+
+	<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.min.js"></script>
+
+    <script>
+     // Full list of configuration options available at:
+     // https://github.com/hakimel/reveal.js#configuration
+     Reveal.initialize({
+       slideNumber:true,
+       controls: true,
+       progress: true,
+       history: true,
+       center: true,
+       transitionSpeed:'slow',
+       previewLinks:true,
+       transition: 'convex', // none/fade/slide/convex/concave/zoom
+       // Optional reveal.js plugins
+       dependencies: [
+	 { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js',
+	   condition: function() { return !document.body.classList; } },
+	 { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js',
+	   condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	 { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js',
+	   condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	 { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/highlight/highlight.js',
+	   async: true,
+	   condition: function() { return !!document.querySelector( 'pre code' ); },
+	   callback: function() { hljs.initHighlightingOnLoad(); } },
+	 { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true },
+	 { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true }
+       ]
+     });
+    </script>
+	</body>
+</html>
